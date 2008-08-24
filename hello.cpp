@@ -70,14 +70,6 @@ int main(int argc, char* argv[])
     exit.sp_adj = 0;
     exit.rp_adj = 0;
 
-    ap::InterpState state;
-    state.sp  = 0;
-    state.eos = 0;
-    state.rp  = 0;
-    state.eor = 0;
-    state.gp  = 0;
-    state.cx  = 0;
-
     f->lastIns = lir->insGuard(nj::LIR_x, lir->insImm(1), &exit);
     compile(frago->assm(), f);
 
@@ -85,6 +77,14 @@ int main(int argc, char* argv[])
         nj::NIns *code; 
         nj::GuardRecord* (FASTCALL *func)(ap::InterpState*, nj::Fragment*); 
     } u;
+
+    ap::InterpState state;
+    state.sp  = 0;
+    state.eos = 0;
+    state.rp  = 0;
+    state.eor = 0;
+    state.gp  = 0;
+    state.cx  = 0;
 
     u.code = f->code();
     nj::GuardRecord* lr = u.func(&state, NULL);
