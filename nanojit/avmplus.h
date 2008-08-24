@@ -37,7 +37,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "jstypes.h"
+//#include "jstypes.h"
 
 #define FASTCALL JS_FASTCALL
 
@@ -76,6 +76,20 @@ typedef JSUint64 uint64_t;
 typedef JSInt64  int64_t;
 #else
 #include <stdint.h>
+#endif
+
+// XXX: omo
+typedef unsigned int   uint32;
+typedef unsigned short uint16;
+typedef unsigned char  uint8;
+
+// from jstypes.h
+#if defined(_MSC_VER) && defined(_M_IX86)
+#define JS_FASTCALL __fastcall
+#elif defined(__GNUC__) && defined(__i386__)
+#define JS_FASTCALL __attribute__((fastcall))
+#else
+#define JS_FASTCALL
 #endif
 
 #if defined(_MSC_VER) && defined(AVMPLUS_IA32)

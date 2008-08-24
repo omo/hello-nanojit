@@ -106,6 +106,7 @@ namespace nanojit
 
 #ifdef NJ_VERBOSE
 	#include <stdio.h>
+	#include <stdarg.h>
 	#define verbose_output						if (verbose_enabled()) Assembler::output
 	#define verbose_outputf						if (verbose_enabled()) Assembler::outputf
 	#define verbose_enabled()					(_verbose)

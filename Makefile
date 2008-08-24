@@ -8,7 +8,7 @@ EXENAME = hello
 SRC=hello.cpp jstracer.cpp
 OBJ=${patsubst %.cpp, %.o, ${SRC}}
 
-all: ${EXENAME} libs
+all: libs ${EXENAME}
 
 %o: %.cpp
 	g++ ${CXXFLAGS} -c $<
@@ -16,7 +16,11 @@ all: ${EXENAME} libs
 libs:
 	cd nanojit; make
 
+clean:
+	cd nanojit;	 make clean
+	-rm ${OBJ} ${EXENAME}
+
 ${EXENAME}: ${OBJ}
 	g++ $^ ${LDFLAGS} -o $@
 
-.PHONY: lib
+.PHONY: lib clean
